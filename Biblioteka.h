@@ -1,3 +1,5 @@
+// Biblioteka.h
+
 #ifndef BIBLIOTEKA_H
 #define BIBLIOTEKA_H
 
@@ -8,10 +10,15 @@
 
 class Biblioteka {
 public:
+    Biblioteka();
+
     void dodajProdukt(Produkt* produkt);
     void dodajCzytelnika(Czytelnik* czytelnik);
     void wypozyczProdukt(int czytelnikID, int produktID);
     int pobierzNoweID();
+
+    // Dodana funkcja do wyświetlania stanu książek
+    void wyswietlStanKsiazek() const;
 
 private:
     int ostatnieID;

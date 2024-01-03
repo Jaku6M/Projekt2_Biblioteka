@@ -1,6 +1,12 @@
+// Biblioteka.cpp
+
 #include "Biblioteka.h"
+#include "Ksiazka.h" 
+#include "Czytelnik.h" 
 #include <algorithm>
 #include <iostream>
+
+Biblioteka::Biblioteka() : ostatnieID(0) {}
 
 void Biblioteka::dodajProdukt(Produkt* produkt) {
     produkty[produkt->getID()] = produkt;
@@ -26,4 +32,14 @@ void Biblioteka::wypozyczProdukt(int czytelnikID, int produktID) {
 
 int Biblioteka::pobierzNoweID() {
     return ++ostatnieID;
+}
+
+void Biblioteka::wyswietlStanKsiazek() const {
+    std::cout << "Stan książek w bibliotece:" << std::endl;
+    for (const auto& para : produkty) {
+        const Ksiazka* ksiazka = dynamic_cast<const Ksiazka*>(para.second);
+        if (ksiazka != nullptr) {
+            ksiazka->wypiszInformacje();
+        }
+    }
 }

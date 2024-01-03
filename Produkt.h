@@ -8,8 +8,9 @@
 class Produkt {
 public:
     Produkt(int id, std::string tytul);
-    int getID() const;
-    std::string getTytul() const;
+    virtual ~Produkt() = default;  // Dodaj wirtualny destruktor
+    virtual int getID() const;
+    virtual std::string getTytul() const;
 
 private:
     int id;
