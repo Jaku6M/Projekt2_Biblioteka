@@ -3,6 +3,7 @@
 #include "Biblioteka.h"
 #include "Ksiazka.h" 
 #include "Czytelnik.h" 
+#include "Student.h"
 #include <algorithm>
 #include <iostream>
 
@@ -43,3 +44,16 @@ void Biblioteka::wyswietlStanKsiazek() const {
         }
     }
 }
+
+void Biblioteka::wyswietlCzytelnikow() const {
+    std::cout << "\n==== Lista Czytelnikow ====\n";
+    for (const auto& czytelnik : czytelnicy) {
+        std::cout << "ID: " << czytelnik->getID() << ", Imie: " << czytelnik->getImie()
+                  << ", Nazwisko: " << czytelnik->getNazwisko();
+        if (auto student = dynamic_cast<const Student*>(czytelnik)) {
+            std::cout << ", Kierunek: " << student->getKierunek();
+        }
+        std::cout << std::endl;
+    }
+}
+

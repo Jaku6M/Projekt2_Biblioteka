@@ -8,4 +8,6 @@ Student::Student(int id, std::string imie, std::string nazwisko, std::string kie
     // Additional initialization for the Student class, if needed
 }
 
-// Add any additional member function implementations for the Student class if needed
+std::string Student::getKierunek() const {
+    return kierunek;
+}

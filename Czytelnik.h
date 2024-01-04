@@ -10,6 +10,8 @@ public:
 
     virtual void wypozyczKsiazke(Produkt& produkt);
     int getID() const;
+    std::string getImie() const;
+    std::string getNazwisko() const;
 
 protected:
     int id;

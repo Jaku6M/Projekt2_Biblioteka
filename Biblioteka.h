@@ -15,6 +15,7 @@ public:
     void dodajProdukt(Produkt* produkt);
     void dodajCzytelnika(Czytelnik* czytelnik);
     void wypozyczProdukt(int czytelnikID, int produktID);
+    void wyswietlCzytelnikow() const;
     int pobierzNoweID();
 
     // Dodana funkcja do wyświetlania stanu książek

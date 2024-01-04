@@ -1,5 +1,3 @@
-// main.cpp
-
 #include "Produkt.h"
 #include "Ksiazka.h"
 #include "Czytelnik.h"
@@ -15,8 +13,9 @@ int main() {
         std::cout << "1. Dodaj ksiazke\n";
         std::cout << "2. Dodaj czytelnika\n";
         std::cout << "3. Wypozycz ksiazke\n";
-        std::cout << "4. Wyswietl stan ksiazek\n";  // Nowa opcja
-        std::cout << "5. Wyjdz\n";
+        std::cout << "4. Wyjdz\n";
+        std::cout << "5. Wyswietl czytelnikow\n"; 
+        std::cout << "6. Wyswietl ksiazki\n";
 
         int wybor;
         std::cout << "Wybierz opcje: ";
@@ -80,13 +79,17 @@ int main() {
                 biblioteka.wypozyczProdukt(czytelnikID, ksiazkaID);
                 break;
             }
-            case 4: {
+            case 4:
+                std::cout << "Zakonczono program.\n";
+                return 0;
+            case 5: {
+                biblioteka.wyswietlCzytelnikow();
+                break;
+            }
+            case 6: {
                 biblioteka.wyswietlStanKsiazek();
                 break;
             }
-            case 5:
-                std::cout << "Zakonczono program.\n";
-                return 0;
             default:
                 std::cout << "Nieprawidlowy wybor. Sprobuj ponownie.\n";
         }

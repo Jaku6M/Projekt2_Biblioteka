@@ -8,8 +8,7 @@ class Student : public Czytelnik {
 public:
     Student(int id, std::string imie, std::string nazwisko, std::string kierunek);
     
-    // Add any specific members or functions for the Student class if needed
-
+    std::string getKierunek() const;
 private:
     std::string kierunek; // Assuming kierunek is a field specific to Student
 };

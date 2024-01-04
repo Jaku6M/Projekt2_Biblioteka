@@ -10,3 +10,11 @@ void Czytelnik::wypozyczKsiazke(Produkt& produkt) {
 int Czytelnik::getID() const {
     return id;
 }
+
+std::string Czytelnik::getImie() const {
+    return imie;
+}
+
+std::string Czytelnik::getNazwisko() const {
+    return nazwisko;
+}
