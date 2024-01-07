@@ -1,5 +1,6 @@
 #include "Produkt.h"
 #include "Ksiazka.h"
+#include "Artykul.h"
 #include "Czytelnik.h"
 #include "Biblioteka.h"
 #include "Student.h"
@@ -10,7 +11,7 @@ int main() {
 
     while (true) {
         std::cout << "\n==== Menu ====\n";
-        std::cout << "1. Dodaj ksiazke\n";
+        std::cout << "1. Dodaj pozycje do bazy danych\n";
         std::cout << "2. Dodaj czytelnika\n";
         std::cout << "3. Wypozycz ksiazke\n";
         std::cout << "4. Wyjdz\n";
@@ -21,27 +22,71 @@ int main() {
         std::cout << "Wybierz opcje: ";
         std::cin >> wybor;
 
-        switch (wybor) {
-            case 1: {
-                std::string tytul, autor;
-                int rok;
+        switch (wybor)
+        {
+            case 1:
+                {
+                    std::cout << "\n==== Menu ====\n";
+                    std::cout << "1. Dodaj ksiazke do bazy danych\n";
+                    std::cout << "2. Dodaj artykul do bazy danych\n";
 
-                std::cout << "Podaj tytul ksiazki: ";
-                std::cin.ignore(); // Ignoruj znak nowej linii w buforze
-                std::getline(std::cin, tytul);
+                    int wybor_pozycji;
+                    std::cout << "Wybierz opcje: ";
+                    std::cin >> wybor_pozycji;
+                        switch (wybor_pozycji) 
+                        {
+                            case 1:
+                            {
+                                std::string tytul, autor;
+                                int rok;
+                                int ISBN;
 
-                std::cout << "Podaj autora ksiazki: ";
-                std::getline(std::cin, autor);
+                                std::cout << "Podaj tytul ksiazki: ";
+                                std::cin.ignore(); // Ignoruj znak nowej linii w buforze
+                                std::getline(std::cin, tytul);
 
-                std::cout << "Podaj rok wydania ksiazki: ";
-                std::cin >> rok;
+                                std::cout << "Podaj autora ksiazki: ";
+                                std::getline(std::cin, autor);
 
-                Produkt* ksiazka = new Ksiazka(biblioteka.pobierzNoweID(), tytul, autor, rok);
-                biblioteka.dodajProdukt(ksiazka);
+                                std::cout << "Podaj rok wydania ksiazki: ";
+                                std::cin >> rok;
+                                
+                                std::cout << "Podaj ISBN: ";
+                                std::cin >> ISBN;
 
-                std::cout << "Ksiazka dodana do biblioteki.\n";
-                break;
-            }
+                                Produkt* ksiazka = new Ksiazka(biblioteka.pobierzNoweID(), tytul, autor, rok, ISBN);
+                                biblioteka.dodajProdukt(ksiazka);
+
+                                std::cout << "Ksiazka dodana do biblioteki.\n";
+                                break;
+                            }
+                            case 2:
+                            {
+                                std::string tytul, autor;
+                                int rok, ilosccytowan;
+
+                                std::cout << "Podaj tytul artykulu: ";
+                                std::cin.ignore();
+                                std::getline(std::cin, tytul);
+
+                                std::cout << "Podaj autora artykulu: ";
+                                std::getline(std::cin, autor);
+
+                                std::cout << "Podaj rok publikacji artykulu: ";
+                                std::cin >> rok;
+
+                                std::cout << "Podaj ilosc zacytowanych dziel: ";
+                                std::cin >> ilosccytowan;
+
+                                Produkt* artykul = new Artykul(biblioteka.pobierzNoweID(), tytul, autor, rok, ilosccytowan);
+                                biblioteka.dodajProdukt(artykul);
+
+                                std::cout << "Artykul dodany do biblioteki.\n";
+                                break;
+                            }
+                        }
+                        break;
+                }
             case 2: {
                 std::string imie, nazwisko, kierunek;
 
