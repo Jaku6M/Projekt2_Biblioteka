@@ -16,7 +16,7 @@ int main() {
         std::cout << "3. Wypozycz ksiazke\n";
         std::cout << "4. Wyjdz\n";
         std::cout << "5. Wyswietl czytelnikow\n"; 
-        std::cout << "6. Wyswietl ksiazki\n";
+        std::cout << "6. Wyswietl baze danych\n";
 
         int wybor;
         std::cout << "Wybierz opcje: ";
@@ -87,7 +87,8 @@ int main() {
                         }
                         break;
                 }
-            case 2: {
+            case 2:
+            {
                 std::string imie, nazwisko, kierunek;
 
                 std::cout << "Podaj imie czytelnika: ";
@@ -102,9 +103,9 @@ int main() {
                 Czytelnik* czytelnik;
 
                 if (!kierunek.empty()) {
-                    czytelnik = new Student(biblioteka.pobierzNoweID(), imie, nazwisko, kierunek);
+                    czytelnik = new Student(biblioteka.pobierzNoweID_czytelnika(), imie, nazwisko, kierunek);//wymienic to na make_unique!!!!!!
                 } else {
-                    czytelnik = new Czytelnik(biblioteka.pobierzNoweID(), imie, nazwisko);
+                    czytelnik = new Czytelnik(biblioteka.pobierzNoweID_czytelnika(), imie, nazwisko);
                 }
 
                 biblioteka.dodajCzytelnika(czytelnik);
@@ -112,7 +113,8 @@ int main() {
                 std::cout << "Czytelnik dodany do biblioteki.\n";
                 break;
             }
-            case 3: {
+            case 3: 
+            {
                 int czytelnikID, ksiazkaID;
 
                 std::cout << "Podaj ID czytelnika: ";
@@ -127,12 +129,32 @@ int main() {
             case 4:
                 std::cout << "Zakonczono program.\n";
                 return 0;
-            case 5: {
+            case 5:
+            {
                 biblioteka.wyswietlCzytelnikow();
                 break;
             }
-            case 6: {
-                biblioteka.wyswietlStanKsiazek();
+            case 6: 
+            {
+                std::cout << "\n==== Menu ====\n";
+                std::cout << "1. Wyswietl ksiazki w bazie danych\n";
+                std::cout << "2. Wyswietl artykuly w bazie danych\n";
+
+                int wybor_typu;
+                std::cout << "Wybierz opcje: ";
+                std::cin >> wybor_typu;
+
+                switch (wybor_typu)
+                {
+                    case 1:
+                        biblioteka.wyswietlStanKsiazek();
+                        break;
+                    case 2:
+                        biblioteka.wyswietlStanArtykulow();
+                        break;
+                    default:
+                        break;
+                }
                 break;
             }
             default:
