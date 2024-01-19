@@ -11,7 +11,15 @@ T wczytajDane(const std::string& komunikat) {
         try {
             T wartosc;
             std::cout << komunikat;
-            std::cin >> wartosc;
+            if constexpr (std::is_same_v<T, std::string>) {
+                // Kod wewnątrz tego bloku jest kompilowany tylko, gdy T jest typem std::string.
+                // Tutaj używamy std::getline do wczytania całej linii tekstu ze standardowego wejścia.
+                std::getline(std::cin, wartosc);
+            } else {
+                // Kod wewnątrz tego bloku jest kompilowany tylko, gdy T nie jest typem std::string.
+                // Tutaj używamy standardowego operatora >> do wczytania danych dla innych typów.
+                std::cin >> wartosc;
+            }
 
             if (std::cin.fail()) {//sprawdzenie czy operacja wczytywania danych zakonczyla sie porazka
                 throw std::runtime_error("Blad: Nieprawidlowy format danych.");//jesli tak to wyswietl komunikat

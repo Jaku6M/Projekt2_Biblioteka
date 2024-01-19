@@ -13,6 +13,7 @@
 #include "Ksiazka.h" 
 #include "Artykul.h"
 #include "Student.h"
+#include "Pracownik_biblioteki.h"
 
 class Biblioteka {
 public:
@@ -74,6 +75,10 @@ public:
             if (auto student = dynamic_cast<const Student*>(czytelnik)) 
             {
                 std::cout << ", Kierunek: " << student->getKierunek();
+            }
+            else if (auto pracownik = dynamic_cast<const Pracownik*>(czytelnik)) 
+            {
+                std::cout << ", nr identyfikatora: " << pracownik->getIdentyfikator();
             }
             std::cout << std::endl;
         }

@@ -5,7 +5,7 @@
 
 class Pracownik : public Czytelnik {// Pracownik to klasa dziedziczaca po klasie czytelnik
 public:
-    Pracownik(int id, std::string imie, std::string nazwisko, int identyfikator_podany): Czytelnik(id, imie, nazwisko), kierunek(identyfikator_podany) {}
+    Pracownik(int id, std::string imie, std::string nazwisko, int identyfikator_podany): Czytelnik(id, imie, nazwisko), identyfikator(identyfikator_podany) {}
    //deklaracja konstruktora klasy Pracownik                                         lista inicjalizacyjna konstruktora wywolujaca klase bazowa 
     void wypozyczKsiazke(Produkt& produkt) 
     {

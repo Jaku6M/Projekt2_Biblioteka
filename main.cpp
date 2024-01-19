@@ -5,6 +5,7 @@
 #include "Biblioteka.h"
 #include "Student.h"
 #include "Wczytywaniedanych.h"
+#include "Pracownik_biblioteki.h"
 #include <iostream>
 
 int main() {
@@ -34,6 +35,7 @@ int main() {
                         {
                             case 1:
                             {
+                                std::cin.ignore(); // Ignoruj znak nowej linii w buforze
                                 std::string tytul = wczytajDane<std::string>("Podaj tytul ksiazki: ");
                                 std::string autor = wczytajDane<std::string>("Podaj autora ksiazki: ");
                                 int rok = wczytajDane<int>("Podaj rok wydania ksiazki: ");     
@@ -47,6 +49,7 @@ int main() {
                             }
                             case 2:
                             {
+                                std::cin.ignore(); // Ignoruj znak nowej linii w buforze
                                 std::string tytul = wczytajDane<std::string>("Podaj tytul artykulu: ");
                                 std::string autor = wczytajDane<std::string>("Podaj autora artykulu: ");
                                 int rok = wczytajDane<int>("Podaj rok publikacji artykulu: ");     
@@ -58,22 +61,28 @@ int main() {
                                 std::cout << "Artykul dodany do biblioteki.\n";
                                 break;
                             }
+                            default:
+                            std::cout << "Zla liczba wpisz liczbe w zakresie";
+                            break;
                         }
                         break;
                 }
             case 2:
                 {
+                    std::cin.ignore(); // Ignoruj znak nowej linii w buforze
                     std::string imie = wczytajDane<std::string>("Podaj imie czytelnika: ");
                     std::string nazwisko = wczytajDane<std::string>("Podaj nazwisko czytelnika: ");
                     std::cout << "\n==== Menu ====\n";
                     std::cout << "1. Dodaj Studenta do bazy danych\n";
                     std::cout << "2. Dodaj Czytelnika do bazy danych\n";
+                    std::cout << "3. Dodaj Pracownika biblioteki do bazy danych\n";
 
                     int wybor_pozycji = wczytajDane<int>("Wybierz opcje: ");
                         switch (wybor_pozycji) 
                         {
                             case 1:
                             {
+                                std::cin.ignore(); // Ignoruj znak nowej linii w buforze
                                 std::string kierunek = wczytajDane<std::string>("Podaj kierunek studiow (tylko dla studentow): ");
                                 Czytelnik* czytelnik;//tworzymy wskaznik na obiekt typu Czytelnik wskaznik nazywa sie czytelnik
                                 czytelnik = new Student(biblioteka.pobierzNoweID_czytelnika(), imie, nazwisko, kierunek);
@@ -89,11 +98,25 @@ int main() {
                                 std::cout << "Czytelnik dodany do biblioteki.\n";
                                 break;
                             }
+                            case 3:
+                            {
+                                std::cin.ignore(); // Ignoruj znak nowej linii w buforze
+                                int identyfikator = wczytajDane<int>("Podaj nr identyfikatora ");
+                                Czytelnik* czytelnik;//tworzymy wskaznik na obiekt typu Czytelnik wskaznik nazywa sie czytelnik
+                                czytelnik = new Pracownik(biblioteka.pobierzNoweID_czytelnika(), imie, nazwisko, identyfikator);
+                                biblioteka.dodajCzytelnika(czytelnik);
+                                std::cout << "Pracownik dodany do biblioteki.\n";
+                                break;
+                            }
+                            default:
+                            std::cout << "Zla liczba wpisz liczbe w zakresie";
+                            break;
                         }
                         break;
                 }
             case 3: 
-            {   
+            {
+                std::cin.ignore(); // Ignoruj znak nowej linii w buforze   
                 int czytelnikID = wczytajDane<int>("Podaj ID czytelnika: ");
                 int ksiazkaID = wczytajDane<int>("Podaj ID ksiazki: ");
 
@@ -124,7 +147,7 @@ int main() {
                 std::cout << "\n==== Menu ====\n";
                 std::cout << "1. Wyswietl ksiazki w bazie danych\n";
                 std::cout << "2. Wyswietl artykuly w bazie danych\n";
-
+                std::cin.ignore(); // Ignoruj znak nowej linii w buforze
                 int wybor_typu = wczytajDane<int>("Wybierz opcje: ");               
 
                 switch (wybor_typu)
