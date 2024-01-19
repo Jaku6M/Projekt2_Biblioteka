@@ -54,8 +54,8 @@ int main() {
                                 std::cout << "Podaj ISBN: ";
                                 std::cin >> ISBN;
 
-                                Produkt* ksiazka = new Ksiazka(biblioteka.pobierzNoweID(), tytul, autor, rok, ISBN);
-                                biblioteka.dodajProdukt(ksiazka);
+                                Produkt* ksiazka = new Ksiazka(biblioteka.pobierzNoweID(), tytul, autor, rok, ISBN);//Tworzy nowy obiekt klasy Ksiazka na stercie (heap) przy użyciu operatora new. 
+                                biblioteka.dodajProdukt(ksiazka);//Przekazuje wskaźnik ksiazka do metody dodajProdukt obiektu klasy Biblioteka
 
                                 std::cout << "Ksiazka dodana do biblioteki.\n";
                                 break;
@@ -103,7 +103,7 @@ int main() {
                 Czytelnik* czytelnik;
 
                 if (!kierunek.empty()) {
-                    czytelnik = new Student(biblioteka.pobierzNoweID_czytelnika(), imie, nazwisko, kierunek);//wymienic to na make_unique!!!!!!
+                    czytelnik = new Student(biblioteka.pobierzNoweID_czytelnika(), imie, nazwisko, kierunek);
                 } else {
                     czytelnik = new Czytelnik(biblioteka.pobierzNoweID_czytelnika(), imie, nazwisko);
                 }
@@ -128,6 +128,17 @@ int main() {
             }
             case 4:
                 std::cout << "Zakonczono program.\n";
+
+                //zwalniamy pamiec dynamicznie zaalokowana:
+                for(const auto& para : biblioteka.getProdukty())
+                {
+                    delete para.second;//tylko to zwalniamy bo tylko to jest dynamicznie alokowane
+                }
+
+                for(const auto& czytelnik : biblioteka.getCzytelnicy())
+                {
+                    delete czytelnik;
+                }
                 return 0;
             case 5:
             {

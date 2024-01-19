@@ -112,6 +112,17 @@ public:
         }
     } 
 
+    const std::map<int, Produkt*>& getProdukty() const
+    //nie zmieniamy obiektu//potem typ obiektu taki dziwny ale taki jest wlasnie!//& zwraca referencje do mapy a nie kopie
+    {
+        return produkty;
+    }
+
+    const std::vector<Czytelnik*>& getCzytelnicy() const
+    {
+        return czytelnicy;
+    }
+
 private:
     int ostatnieID;
     int ostatnieID_czytelnika;
