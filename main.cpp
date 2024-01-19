@@ -4,6 +4,7 @@
 #include "Czytelnik.h"
 #include "Biblioteka.h"
 #include "Student.h"
+#include "Wczytywaniedanych.h"
 #include <iostream>
 
 int main() {
@@ -18,9 +19,7 @@ int main() {
         std::cout << "5. Wyswietl czytelnikow\n"; 
         std::cout << "6. Wyswietl baze danych\n";
 
-        int wybor;
-        std::cout << "Wybierz opcje: ";
-        std::cin >> wybor;
+        int wybor = wczytajDane<int>("Wybierz opcje: ");
 
         switch (wybor)
         {
@@ -30,29 +29,15 @@ int main() {
                     std::cout << "1. Dodaj ksiazke do bazy danych\n";
                     std::cout << "2. Dodaj artykul do bazy danych\n";
 
-                    int wybor_pozycji;
-                    std::cout << "Wybierz opcje: ";
-                    std::cin >> wybor_pozycji;
+                    int wybor_pozycji = wczytajDane<int>("Wybierz opcje: ");
                         switch (wybor_pozycji) 
                         {
                             case 1:
                             {
-                                std::string tytul, autor;
-                                int rok;
-                                int ISBN;
-
-                                std::cout << "Podaj tytul ksiazki: ";
-                                std::cin.ignore(); // Ignoruj znak nowej linii w buforze
-                                std::getline(std::cin, tytul);
-
-                                std::cout << "Podaj autora ksiazki: ";
-                                std::getline(std::cin, autor);
-
-                                std::cout << "Podaj rok wydania ksiazki: ";
-                                std::cin >> rok;
-                                
-                                std::cout << "Podaj ISBN: ";
-                                std::cin >> ISBN;
+                                std::string tytul = wczytajDane<std::string>("Podaj tytul ksiazki: ");
+                                std::string autor = wczytajDane<std::string>("Podaj autora ksiazki: ");
+                                int rok = wczytajDane<int>("Podaj rok wydania ksiazki: ");     
+                                int ISBN = wczytajDane<int>("Podaj ISBN: ");
 
                                 Produkt* ksiazka = new Ksiazka(biblioteka.pobierzNoweID(), tytul, autor, rok, ISBN);//Tworzy nowy obiekt klasy Ksiazka na stercie (heap) przy użyciu operatora new. 
                                 biblioteka.dodajProdukt(ksiazka);//Przekazuje wskaźnik ksiazka do metody dodajProdukt obiektu klasy Biblioteka
@@ -62,21 +47,10 @@ int main() {
                             }
                             case 2:
                             {
-                                std::string tytul, autor;
-                                int rok, ilosccytowan;
-
-                                std::cout << "Podaj tytul artykulu: ";
-                                std::cin.ignore();
-                                std::getline(std::cin, tytul);
-
-                                std::cout << "Podaj autora artykulu: ";
-                                std::getline(std::cin, autor);
-
-                                std::cout << "Podaj rok publikacji artykulu: ";
-                                std::cin >> rok;
-
-                                std::cout << "Podaj ilosc zacytowanych dziel: ";
-                                std::cin >> ilosccytowan;
+                                std::string tytul = wczytajDane<std::string>("Podaj tytul artykulu: ");
+                                std::string autor = wczytajDane<std::string>("Podaj autora artykulu: ");
+                                int rok = wczytajDane<int>("Podaj rok publikacji artykulu: ");     
+                                int ilosccytowan = wczytajDane<int>("Podaj ilosc zacytowanych dziel: ");
 
                                 Produkt* artykul = new Artykul(biblioteka.pobierzNoweID(), tytul, autor, rok, ilosccytowan);
                                 biblioteka.dodajProdukt(artykul);
@@ -88,40 +62,40 @@ int main() {
                         break;
                 }
             case 2:
-            {
-                std::string imie, nazwisko, kierunek;
+                {
+                    std::string imie = wczytajDane<std::string>("Podaj imie czytelnika: ");
+                    std::string nazwisko = wczytajDane<std::string>("Podaj nazwisko czytelnika: ");
+                    std::cout << "\n==== Menu ====\n";
+                    std::cout << "1. Dodaj Studenta do bazy danych\n";
+                    std::cout << "2. Dodaj Czytelnika do bazy danych\n";
 
-                std::cout << "Podaj imie czytelnika: ";
-                std::cin >> imie;
-
-                std::cout << "Podaj nazwisko czytelnika: ";
-                std::cin >> nazwisko;
-
-                std::cout << "Podaj kierunek studiow (tylko dla studentow): ";
-                std::cin >> kierunek;
-
-                Czytelnik* czytelnik;
-
-                if (!kierunek.empty()) {
-                    czytelnik = new Student(biblioteka.pobierzNoweID_czytelnika(), imie, nazwisko, kierunek);
-                } else {
-                    czytelnik = new Czytelnik(biblioteka.pobierzNoweID_czytelnika(), imie, nazwisko);
+                    int wybor_pozycji = wczytajDane<int>("Wybierz opcje: ");
+                        switch (wybor_pozycji) 
+                        {
+                            case 1:
+                            {
+                                std::string kierunek = wczytajDane<std::string>("Podaj kierunek studiow (tylko dla studentow): ");
+                                Czytelnik* czytelnik;//tworzymy wskaznik na obiekt typu Czytelnik wskaznik nazywa sie czytelnik
+                                czytelnik = new Student(biblioteka.pobierzNoweID_czytelnika(), imie, nazwisko, kierunek);
+                                biblioteka.dodajCzytelnika(czytelnik);
+                                std::cout << "Student dodany do biblioteki.\n";
+                                break;
+                            }
+                            case 2:
+                            {
+                                Czytelnik* czytelnik;//tworzymy wskaznik na obiekt typu Czytelnik wskaznik nazywa sie czytelnik
+                                czytelnik = new Czytelnik(biblioteka.pobierzNoweID_czytelnika(), imie, nazwisko);
+                                biblioteka.dodajCzytelnika(czytelnik);
+                                std::cout << "Czytelnik dodany do biblioteki.\n";
+                                break;
+                            }
+                        }
+                        break;
                 }
-
-                biblioteka.dodajCzytelnika(czytelnik);
-
-                std::cout << "Czytelnik dodany do biblioteki.\n";
-                break;
-            }
             case 3: 
-            {
-                int czytelnikID, ksiazkaID;
-
-                std::cout << "Podaj ID czytelnika: ";
-                std::cin >> czytelnikID;
-
-                std::cout << "Podaj ID ksiazki: ";
-                std::cin >> ksiazkaID;
+            {   
+                int czytelnikID = wczytajDane<int>("Podaj ID czytelnika: ");
+                int ksiazkaID = wczytajDane<int>("Podaj ID ksiazki: ");
 
                 biblioteka.wypozyczProdukt(czytelnikID, ksiazkaID);
                 break;
@@ -151,9 +125,7 @@ int main() {
                 std::cout << "1. Wyswietl ksiazki w bazie danych\n";
                 std::cout << "2. Wyswietl artykuly w bazie danych\n";
 
-                int wybor_typu;
-                std::cout << "Wybierz opcje: ";
-                std::cin >> wybor_typu;
+                int wybor_typu = wczytajDane<int>("Wybierz opcje: ");               
 
                 switch (wybor_typu)
                 {
@@ -169,7 +141,8 @@ int main() {
                 break;
             }
             default:
-                std::cout << "Nieprawidlowy wybor. Sprobuj ponownie.\n";
+            std::cout << "Zla liczba wpisz liczbe w zakresie";
+            break;
         }
     }
 }
